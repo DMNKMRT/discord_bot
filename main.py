@@ -22,8 +22,9 @@ async def on_ready():
 # Wenn man $check in den Discord server schreibt, wird der print und der send befehl ausgeführt.
 @client.command()
 async def check(ctx):
+    embed = discord.Embed(title="dominiks embed", description= "master_mind is here bitches")
     print("master_mind is working")
-    await ctx.send("master_mind is here")
+    await ctx.send(embed= embed)
 
 
 
