@@ -18,9 +18,12 @@ async def on_ready():
     print("Hello, my name is master_mind and im the master_minddddd")
 
 
+# ein command hört auf den voreingestelten Prefix ($)
+# Wenn man $check in den Discord server schreibt, wird der print und der send befehl ausgeführt.
 @client.command()
 async def check(ctx):
     print("master_mind is working")
+    await ctx.send("master_mind is here")
 
 
 
