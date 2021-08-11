@@ -44,5 +44,12 @@ async def check(ctx):
 async def add_role(ctx, user: discord.Member, role: discord.Role):
     await user.add_roles(role)
 
+
+# Methode um einen User zu kicken
+@client.command()
+async def kick_member(ctx, user: discord.Member):
+    await user.send("You were kicked from the Server - please dont contact the admin")
+    await user.kick()
+
 # Das ist damit der Bot startet, wenn das ausgeführt wird
 client.run(config["TOKEN"])
