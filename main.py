@@ -42,6 +42,7 @@ async def check(ctx):
 @client.command()
 async def add_role(ctx, user: discord.Member, role: discord.Role):
     await user.add_roles(role)
+    print(f'User: {user.name}, got the {role.name} role')
 
 
 # Methode um member zu stummzuschalten im sprachchat
@@ -59,10 +60,12 @@ async def unmute_member(ctx, user: discord.Member):
     await user.remove_roles(mute_role)
     print(f'User: {user.name}, got unmuted')
 
+
 # Methode um einen User zu kicken
 @client.command()
 async def kick_member(ctx, user: discord.Member):
     await user.send("You were kicked from the Server - please dont contact the admin")
+    print(f'User: {user.name}, got kicked')
     await user.kick()
 
 
@@ -70,6 +73,7 @@ async def kick_member(ctx, user: discord.Member):
 @client.command()
 async def ban_member(ctx, user: discord.Member):
     await user.send("You were banned from the Server - please dont contact the admin")
+    print(f'User: {user.name}, got banned')
     await user.ban()
 
 # Das ist damit der Bot startet, wenn das ausgeführt wird
