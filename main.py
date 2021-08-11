@@ -7,15 +7,26 @@ import json
 config = json.load(open('config.json'))
 
 
+intents = discord.Intents.default()
+intents.members = True
+
 # client erstellen für die Discord connection
-client = discord.ext.commands.Bot(command_prefix="$")
+client = discord.ext.commands.Bot(command_prefix="$", intents=intents)
 
 # event: Ein event ist wenn etwas passiert
 # on_ready event ist, wenn der Bot bereit ist, also quasi "online" ist
 
+
 @client.event
 async def on_ready():
     print("Hello, my name is master_mind and im the master_minddddd")
+
+
+# Das ist die methode für einen willkommenstext, wenn ein member joined, bekommt er eine personalisierte Nachricht per DM
+@client.event
+async def on_member_join(member):
+    print("test member")
+    await member.send(f'Hello {member.name}, whats up?!')
 
 
 # ein command hört auf den voreingestelten Prefix ($)
