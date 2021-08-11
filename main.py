@@ -6,7 +6,7 @@ import json
 # config aus der json datei holen
 config = json.load(open('config.json'))
 
-
+# Das ist für die member.send methode
 intents = discord.Intents.default()
 intents.members = True
 
@@ -22,7 +22,8 @@ async def on_ready():
     print("Hello, my name is master_mind and im the master_minddddd")
 
 
-# Das ist die methode für einen willkommenstext, wenn ein member joined, bekommt er eine personalisierte Nachricht per DM
+# Das ist die methode für einen willkommenstext,
+# wenn ein member joined, bekommt er eine personalisierte Nachricht per DM
 @client.event
 async def on_member_join(member):
     print("test member")
@@ -38,7 +39,10 @@ async def check(ctx):
     await ctx.send(embed= embed)
 
 
-
+# command um jemandem eine rolle zu geben
+@client.command()
+async def add_role(ctx, user: discord.Member, role: discord.Role):
+    await user.add_roles(role)
 
 # Das ist damit der Bot startet, wenn das ausgeführt wird
 client.run(config["TOKEN"])
