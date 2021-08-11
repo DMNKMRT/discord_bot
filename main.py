@@ -25,7 +25,7 @@ async def on_ready():
 # wenn ein member joined, bekommt er eine personalisierte Nachricht per DM
 @client.event
 async def on_member_join(member):
-    print("test member")
+    print(f'{member.name} joined the server and got a welcome message')
     await member.send(f'Hello {member.name}, whats up?!')
 
 
