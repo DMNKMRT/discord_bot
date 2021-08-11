@@ -13,10 +13,9 @@ intents.members = True
 # client erstellen für die Discord connection
 client = discord.ext.commands.Bot(command_prefix="$", intents=intents)
 
+
 # event: Ein event ist wenn etwas passiert
 # on_ready event ist, wenn der Bot bereit ist, also quasi "online" ist
-
-
 @client.event
 async def on_ready():
     print("Hello, my name is master_mind and im the master_minddddd")
@@ -50,6 +49,13 @@ async def add_role(ctx, user: discord.Member, role: discord.Role):
 async def kick_member(ctx, user: discord.Member):
     await user.send("You were kicked from the Server - please dont contact the admin")
     await user.kick()
+
+
+# Methode um einen User zu banen
+@client.command()
+async def ban_member(ctx, user: discord.Member):
+    await user.send("You were banned from the Server - please dont contact the admin")
+    await user.ban()
 
 # Das ist damit der Bot startet, wenn das ausgeführt wird
 client.run(config["TOKEN"])
