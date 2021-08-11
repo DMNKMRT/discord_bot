@@ -44,6 +44,13 @@ async def add_role(ctx, user: discord.Member, role: discord.Role):
     await user.add_roles(role)
 
 
+# Methode um member zu stummzuschalten im sprachchat
+@client.command()
+async def mute_member(ctx, user: discord.Member):
+    mute_role = ctx.guild.get_role(int(config["MUTE_ROLE"]))
+    await user.add_roles(mute_role)
+    print(f'User: {user.name}, got muted')
+
 # Methode um einen User zu kicken
 @client.command()
 async def kick_member(ctx, user: discord.Member):
