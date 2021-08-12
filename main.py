@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-
 import json
 
 # config aus der json datei holen
@@ -16,9 +15,12 @@ client = discord.ext.commands.Bot(command_prefix="$", intents=intents)
 
 # event: Ein event ist wenn etwas passiert
 # on_ready event ist, wenn der Bot bereit ist, also quasi "online" ist
+# zusätzlich wird eine globale variable erstellt mit dem log_channel
 @client.event
 async def on_ready():
     print("Hello, my name is master_mind and im the master_minddddd")
+    global log_channel
+    log_channel = client.get_channel(int(config["LOG_ID"]))
 
 
 # Das ist die methode für einen willkommenstext,
@@ -70,7 +72,9 @@ async def kick_member(ctx, user: discord.Member):
         await user.kick()
     else:
         await ctx.send("you have no permissions for the command")
-        print(f"user: {user.name} had tried to kick a member")
+        # Nachricht in Log channel wird geschrieben
+        await log_channel.send(f"user: {ctx.message.author.name} had tried to kick {user.name}")
+        print(f"user: {ctx.message.author.name} had tried to kick {user.name}")
 
 
 # Methode um einen User zu banen
@@ -82,7 +86,9 @@ async def ban_member(ctx, user: discord.Member):
         await user.ban()
     else:
         await ctx.send("you have no permissions for this command")
-        print(f"user: {user.name} had tried to ban a member")
+        # Nachricht in Log channel wird geschrieben
+        await log_channel.send(f"user: {ctx.message.author.name} had tried to ban {user.name}")
+        print(f"user: {ctx.message.author.name} had tried to ban {user.name}")
 
 # Das ist damit der Bot startet, wenn das ausgeführt wird
 client.run(config["TOKEN"])
