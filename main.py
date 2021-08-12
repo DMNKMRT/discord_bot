@@ -64,17 +64,25 @@ async def unmute_member(ctx, user: discord.Member):
 # Methode um einen User zu kicken
 @client.command()
 async def kick_member(ctx, user: discord.Member):
-    await user.send("You were kicked from the Server - please dont contact the admin")
-    print(f'User: {user.name}, got kicked')
-    await user.kick()
+    if ctx.message.author.guild_permissions.administrator:
+        await user.send("You were kicked from the Server - please dont contact the admin")
+        print(f'User: {user.name}, got kicked')
+        await user.kick()
+    else:
+        await ctx.send("you have no permissions for the command")
+        print(f"user: {user.name} had tried to kick a member")
 
 
 # Methode um einen User zu banen
 @client.command()
 async def ban_member(ctx, user: discord.Member):
-    await user.send("You were banned from the Server - please dont contact the admin")
-    print(f'User: {user.name}, got banned')
-    await user.ban()
+    if ctx.message.author.guild_permissions.administrator:
+        await user.send("You were banned from the Server - please dont contact the admin")
+        print(f'User: {user.name}, got banned')
+        await user.ban()
+    else:
+        await ctx.send("you have no permissions for this command")
+        print(f"user: {user.name} had tried to ban a member")
 
 # Das ist damit der Bot startet, wenn das ausgeführt wird
 client.run(config["TOKEN"])
