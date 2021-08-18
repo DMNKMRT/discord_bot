@@ -2,6 +2,7 @@ import datetime
 
 import discord
 from discord.ext import commands
+import discord.ext
 import json
 
 # config aus der json datei holen
@@ -115,6 +116,17 @@ async def bot_logout(ctx):
     else:
         await ctx.send("You dont have the rigth permissions")
         await log(f"{ctx.message.author.name} has tried to logout the bot", 0xff1100)
+
+
+# create channel methode
+@client.event
+async def on_voice_state_update(member, before, after):
+    if before.channel is not None and before.channel.name != 'Create Channel' and len(before.channel.voice_states) == 0:
+        await before.channel.delete()
+    elif after.channel is not None and after.channel.name == 'Create Channel':
+        new_channel = await member.guild.create_voice_channel('voice Channel', category=after.channel.category)
+        await member.move_to(new_channel)
+
 
 
 # Das ist damit der Bot startet, wenn das ausgeführt wird
