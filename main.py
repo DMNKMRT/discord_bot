@@ -5,6 +5,8 @@ from discord.ext import commands
 import discord.ext
 import json
 
+import voice_channel_name
+
 # config aus der json datei holen
 config = json.load(open('config.json'))
 
