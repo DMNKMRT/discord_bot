@@ -39,10 +39,11 @@ async def on_member_join(member):
 # ein command hört auf den voreingestelten Prefix ($)
 # Wenn man $check in den Discord server schreibt, wird der print und der send befehl ausgeführt.
 @client.command()
-async def check(ctx):
+async def bot_status(ctx):
     embed = discord.Embed(title=f"{time}", description="master_mind is here bitches")
+    await ctx.send(embed=embed)
     print("master_mind is working")
-    await ctx.send(embed= embed)
+    await log(f"User: {ctx.message.author.name} had asked for the status of the bot", 0x000000)
 
 
 # command um jemandem eine rolle zu geben
