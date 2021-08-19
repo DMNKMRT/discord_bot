@@ -4,7 +4,8 @@ import datetime
 import random
 import main
 
-
+def setup(client):
+    client.add_cog(Automod(client))
 
 class Automod(commands.Cog):
 
@@ -78,6 +79,3 @@ class Automod(commands.Cog):
             # Nachricht in Log channel wird geschrieben
             await main.log(f"{ctx.message.author.name}, had tried to ban {user.name}", 0xff1100)
             print(f"user: {ctx.message.author.name} had tried to ban {user.name}")
-
-def setup(client):
-    client.add_cog(Automod(client))
