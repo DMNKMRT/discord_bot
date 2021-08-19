@@ -9,7 +9,6 @@ def setup(client):
 
 class Voice_Channel(commands.Cog):
 
-
     def __init__(self, client):
         self.client = client
         self.names = ["hallo", "test1", "Dominiks Voice channel", "Jakobs Voices Channel"]

@@ -1,13 +1,10 @@
 import datetime
 import os
 import random
-
 import discord
 from discord.ext import commands
 import discord.ext
 import json
-
-import voice_channel
 
 # config aus der json datei holen
 config = json.load(open('config.json'))
@@ -18,7 +15,6 @@ intents.members = True
 
 # client erstellen für die Discord connection
 client = discord.ext.commands.Bot(command_prefix="$", intents=intents)
-
 
 # cogs laden
 client.load_extension('automod_commands')
@@ -36,10 +32,12 @@ async def on_ready():
     global time
     time = datetime.datetime.now().strftime("**%H:%M**\n%d-%B-%Y")
 
+# Methode für logs (gelöst durch einen channel wo die embeds mit den logs geschickt werden)
 async def log(log_text, log_color):
     log_embed = discord.Embed(title=f"{time}", description=log_text, color=log_color)
     await log_channel.send(embed=log_embed)
 
+# Methode um den Bot auszuschalten
 @client.command()
 async def bot_logout(ctx):
     if ctx.message.author.guild_permissions.administrator:
