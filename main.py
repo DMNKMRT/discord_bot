@@ -1,4 +1,5 @@
 import datetime
+import random
 
 import discord
 from discord.ext import commands
@@ -125,8 +126,9 @@ async def bot_logout(ctx):
 async def on_voice_state_update(member, before, after):
     if before.channel is not None and before.channel.name != 'Create Channel' and len(before.channel.voice_states) == 0:
         await before.channel.delete()
-    elif after.channel is not None and after.channel.name == 'Create Channel':
-        new_channel = await member.guild.create_voice_channel('voice Channel', category=after.channel.category)
+
+    if after.channel is not None and after.channel.name == 'Create Channel':
+        new_channel = await member.guild.create_voice_channel(random.choice(voice_channel_name.names), category=after.channel.category)
         await member.move_to(new_channel)
 
 
