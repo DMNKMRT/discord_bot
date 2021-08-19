@@ -5,8 +5,6 @@ import random
 import main
 
 
-def setup(client):
-    client.add_cog(Automod(client))
 
 class Automod(commands.Cog):
 
@@ -15,17 +13,17 @@ class Automod(commands.Cog):
 
     # Das ist die methode für einen willkommenstext,
     # wenn ein member joined, bekommt er eine personalisierte Nachricht per DM
-    @commands.command()
-    async def on_member_join(self ,member):
+    @commands.Cog.listener()
+    async def on_member_join(self, member):
         print(f'{member.name} joined the server and got a welcome message')
         await member.send(f'Hello {member.name}, whats up?!')
-        await log_channel.send(f"{member.name} joined the server and got a welcome message from me (me = master_mind)")
+        await main.log_channel.send(f"{member.name} joined the server and got a welcome message from me (me = master_mind)")
 
     # ein command hört auf den voreingestelten Prefix ($)
     # Wenn man $check in den Discord server schreibt, wird der print und der send befehl ausgeführt.
     @commands.command()
-    async def bot_status(self, ctx):
-        embed = discord.Embed(title=f"{time}", description="master_mind is here bitches")
+    async def status(self, ctx):
+        embed = discord.Embed(title=f"{main.time}", description="master_mind is here bitches")
         await ctx.send(embed=embed)
         print("master_mind is working")
         await main.log(f"User: {ctx.message.author.name} had asked for the status of the bot", 0x000000)
@@ -80,3 +78,6 @@ class Automod(commands.Cog):
             # Nachricht in Log channel wird geschrieben
             await main.log(f"{ctx.message.author.name}, had tried to ban {user.name}", 0xff1100)
             print(f"user: {ctx.message.author.name} had tried to ban {user.name}")
+
+def setup(client):
+    client.add_cog(Automod(client))

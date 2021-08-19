@@ -1,4 +1,5 @@
 import datetime
+import os
 import random
 
 import discord
@@ -19,10 +20,15 @@ intents.members = True
 client = discord.ext.commands.Bot(command_prefix="$", intents=intents)
 
 
+# cogs laden
+client.load_extension('automod_commands')
+client.load_extension('voice_channel')
+
+
 # event: Ein event ist wenn etwas passiert
 # on_ready event ist, wenn der Bot bereit ist, also quasi "online" ist
 # zusätzlich wird eine globale variable erstellt mit dem log_channel
-@client.event()
+@client.event
 async def on_ready():
     print("Hello, my name is master_mind and im the master_minddddd")
     global log_channel
